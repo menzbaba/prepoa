@@ -1,222 +1,5 @@
 workspace "Bio Digester" {
     model {
-        group Humans {
-            systemAdmin = person "Compound Admin"
-            residents = person "Residents"
-        }
-
-        group "Live Stock" {
-            chickenLiveStock = softwareSystem "Chicken Live Stock"
-            rabbitsLiveStock = softwareSystem "Rabbit Live Stock"
-            goatLiveStock = softwareSystem "Goat Live Stock"
-
-            envFishTank = deploymentEnvironment "Fish Tank" {
-            }
-        }
-
-        group "Aquoponics Garden" {
-            Aquaponics = softwareSystem "Aquaponics" {
-                aquaponicsNursaryTank = container "Aquaponics Nursary Tank" {
-                    aquaponicsNursaryAquarium = component "Nursary Aquarium"
-                    aquaponicsNursaryTempSensor = component "Nursary Temp Sensor" {
-                        aquaponicsNursaryAquarium -> this
-                    }
-                    aquaponicsNursaryTankDivider = component "Nursary Tank Divider" "Basket for breeding female and males" {
-                        aquaponicsNursaryAquarium -> this
-                    }
-                    aquaponicsNursaryOutput = component "Nursary Output" {
-                        aquaponicsNursaryAquarium -> this
-                    }
-                    aquaponicsNursarySiphonBreak = component "Nursary Siphon Break" "Prevent Nursary Output from causing siphon and emptying tank" {
-                        aquaponicsNursaryOutput -> this
-                    }
-                    aquaponicsNursaryOutputValve = component "Nursary Output Valve" {
-                        aquaponicsNursaryOutput -> this
-                    }
-                }
-
-                aquaponicsFishTank = container "Aquaponics Fish Tank" {
-                    aquaponicsFishAquarium = component "Aquaponics Fish Aquarium"
-                    aquaponicsAquariumOutput = component "Aquarium Output" {
-                        aquaponicsFishAquarium -> this
-                    }
-                    aquaponicsOutputSiphonBreak = component "Aquarium Siphon Break" "Prevent Aquarium Output from causing siphon and emptying tank" {
-                        aquaponicsAquariumOutput -> this
-                    }
-                    aquaponicsFishTankOutputValve = component "Fish Tank Output Valve" {
-                        aquaponicsFishAquarium -> this
-                    }
-                }
-
-                aquaponicsTempMaintainer = container "Aquaponics Temp Maintainer" {
-                    aquaponicsTempBackupBattery = component "Aquaponics Temp Maintainer Backup Battery"
-                    aquaponicLowPowerTempMaintainer = component "Aquaponics Low Power Temp Maintainer" {
-                        aquaponicsTempBackupBattery -> this
-                    }
-                    aquaponicsTempMaintain = component "Temp Maintainer" {
-                        aquaponicLowPowerTempMaintainer -> this
-                        this -> aquaponicsFishAquarium
-                        this -> aquaponicsNursaryAquarium
-                    }
-                }
-
-                aquaponicsAerator = container "Aquaponics Aerator" "Oxygenates fish and bacteria" {
-                    aquaponicsAeratorBackupBattery = component "Aquaponics Backup Battery"
-                    aquaponicsAeratorLowPowerAerator = component "Aquaponics Low Power Aerator" {
-                        aquaponicsAeratorBackupBattery -> this
-                    }
-                    aquaponicsAeratorBubblerBrick = component "Aquaponics Bubbler Brick" {
-                        aquaponicsAeratorLowPowerAerator -> this
-                    }
-                    aquaponicsOxygen = component "Aerator Oxygen" {
-                        aquaponicsAeratorBubblerBrick -> this
-                        this -> aquaponicsFishAquarium
-                        this -> aquaponicsNursaryAquarium
-                    }
-                }
-
-                radialFlowFilter = container "Radial Flow Filter" "Removes Solids from fish tank, including food and solid poop" {
-                    radialFlowInput = component "Radial Flow Input" {
-                        aquaponicsFishTankOutputValve -> this
-                        aquaponicsNursaryOutputValve -> this
-                    }
-                    radialFlowPTube = component "Radial Flow P Tube" {
-                        radialFlowInput -> this
-                    }
-                    radialFlowPTubeBell = component "Radial Flow P Tube Bell" {
-                        radialFlowPTube -> this
-                    }
-                    radialFlowTank = component "Radial Flow Tank" {
-                        radialFlowPTube -> this
-                    }
-                    radialFlowFilterMaterial = component "Radial Flow Filter Material" {
-                        radialFlowTank -> this
-                    }
-                    radialFlowFlushValve = component "Radial Flow Flush Valve" {
-                        radialFlowTank -> this
-                    }
-                    radialFlowOutputValve = component "Radial Flow Output Valve" {
-                        radialFlowTank -> this
-                    }
-                }
-
-                aquaponicsGrowBed = container "Aquaponics Grow Bed" {
-                    radialFlowOutputValve -> this
-                }
-
-                aquaponicsGrowBedSiphon = container "Aquaponics Grow Bed Siphon" {
-                    growbedSiphonOutsideCourseFilter = component "Outside Siphon Course Filter" "Keeps out grow bed material from siphon and makes it easy to maintain the siphon" {
-                        aquaponicsGrowBed -> this
-                    }
-                    growbedSiphonOutsideCourseFilterLid = component "Outside Siphon Course Filter lid" {
-                        growbedSiphonOutsideCourseFilter -> this
-                    }
-                    growbedSiphonBell = component "Siphon Bell" {
-                        growbedSiphonOutsideCourseFilter -> this
-                    }
-                    growbedSiphonTube = component "Siphon Tube" {
-                        growbedSiphonBell -> this
-                    }
-                    growbedSiphonOutputValve = component "Siphon Output Valve" {
-                        growbedSiphonTube -> this
-                    }
-                }
-                
-                aquaponicsSurgeTank = container "Aquaponics Surge Tank" {
-                    growbedSiphonOutputValve -> this
-                }
-
-                aquaponicsSystemPump = container "Aquaponics System Pump" {
-                    aquaponicsSurgeTank -> this
-                    this -> aquaponicsFishAquarium
-                    this -> aquaponicsNursaryAquarium
-                }
-
-            }
-        }
-
-        group "Water Handling" {
-            waterHandlingSystem = softwareSystem "Water Handling System" {
-                municipalWater = container "Municipal Water" {
-                }
-                wellWater = container "Well Water" {
-                }
-                rainWater = container "Rain Water Harvesting" {
-                    waterCisterns = component "Water Cisterns"
-                    cisternOverflow = component "Cistern Overflow"
-                }
-                sourceWater = container "Source Water" {
-                    municipalWater -> this
-                    wellWater -> this
-                    rainWater -> this
-                }
-                waterScrubbers = container "Water Scrubbers" {
-                    sourceWater -> this
-                    roughSedimentFilter = component "Rough Sediment Filter" "Reausable filter approx 125 microns" {
-                        sourceWater -> this
-                    }
-                    medSedimentFilter = component "Medium Sediment Filter" {
-                        roughSedimentFilter -> this
-                    }
-                    fineSedimentFilter = component "Fine Sediment Filter" {
-                        medSedimentFilter -> this
-                    }
-                    carbonWaterFilter = component "Carbon Water Filter"
-                    carbonWaterFilter2 = component "Carbon Water Filter 2"
-                    uvLightWaterFilter = component "UV Light Water Filter"
-                    waterSoftener = component "Water Softener"
-                    chlorineWaterFilter = component "Chlorine Water FIlter"
-                    potableWaterFilter = component "PotableWaterFilter"
-                }
-                potableWater = container "Potable Water" {
-                    waterScrubbers -> this
-                    waterHeater = component "Water Heater"
-                    laundryWater = component "Laundry Water"
-                    bathingWater = component "Bathing Water"
-                    dishwasherWater = component "Dishwasher Water"
-                    kitchenSinkInputWater = component "Kitchen Sink Input Water"
-                }
-                greyWater = container "Grey Water" {
-                    potableWater -> this
-                    edibleBelowGroundWater = component "Edibale Below Ground Garden Water"
-                    livestockWater = component "Livestock Water"
-                }
-                nonPotableWater = container "Non Potable Water" {
-                    sourceWater -> this
-                    greyWater -> this
-                    edibleAboveGroundWater = component "Edibale Above Ground Garden Water"
-                    toiletInputWater = component "Toilet Input Water"
-                    toiletStandingWater = component "Toilet Standing Water" {
-                        toiletInputWater -> this
-                    }
-                    decorativePlantWater = component "Decorative Plant Water"
-                    this -> aquaponicsSurgeTank
-                }
-                blackWater = container "Black Water" {
-                    toiletOutputWater = component "Toilet Output Water" {
-                        toiletStandingWater -> this
-                    }
-                    kitchenSinkOutputWater = component "Kitch Sink Output Water" {
-                        kitchenSinkInputWater -> this
-                    }
-                    digesterInfluent = component "Digester Influent" {
-                        toiletOutputWater -> this
-                        kitchenSinkOutputWater -> this
-                    }
-                }
-                digesterEffluent = container "Digester Effluent Water" {
-                    digesterInfluent -> this
-                }
-                aquaponicsEffluent = container "Aquaponics Effluent Water" {
-                    radialFlowFlushValve -> this
-                }
-                fertizerWater = container "Fertilzed Water" {
-                    digesterEffluent -> this
-                    radialFlowFlushValve -> this
-                }
-            }
-        }
-    
         group "Biogas CH4 Digestor" {
             biogasDigestorSystem = softwareSystem "BioGas Digestor" {
                 BioGasDigesterScience = container "BioGas Digester Science" {
@@ -435,67 +218,37 @@ workspace "Bio Digester" {
             }
 
         }
-
-        group "Energy Handling" {
-            energyHandlingSystem = softwareSystem "Energy Handling System" {
-
-                municipalGas = container "Municipal Gas" {
-                }
-
-                propaneGas = container "Propane Gas" {
-                }
-
-                charcoal = container "Charcoal" {
-                }
-
-                driedWoodEnergy = container "Dried Wood Energy" {
-                }
-
-                sourceGas = container "Source Gas" {
-                    municipalGas -> this
-                    propaneGas -> this
-                    charcoal -> this
-                    driedWoodEnergy -> this
-                    biogasHoldingBagOutputValve -> this
-                    bioMethaneStorageTank -> this
-                }
-            }
+        
+        group "Digester Hydrolysis Relationships" {
+            ProteinsDigesterScience -> AminoAcidsDigesterScience
+            CarbohydratesDigesterScience -> SugarsDigesterScience
+            LipidsDigesterScience -> LCFADigesterScience
         }
-
-
-        compoundSoftware = softwareSystem "Software System"
-
-        systemAdmin -> compoundSoftware "Administers"
-    group "Digester Hydrolysis Relationships" {
-        ProteinsDigesterScience -> AminoAcidsDigesterScience
-        CarbohydratesDigesterScience -> SugarsDigesterScience
-        LipidsDigesterScience -> LCFADigesterScience
-    }
-    group "Digester Acidogenesis Relationships" {
-        AminoAcidsDigesterScience -> AmmoniaHydrogenSulfideDigesterScience
-        AminoAcidsDigesterScience -> VFAAlcoholsDigesterScience
-        SugarsDigesterScience -> AmmoniaHydrogenSulfideDigesterScience
-        SugarsDigesterScience -> VFAAlcoholsDigesterScience
-        LCFADigesterScience -> AmmoniaHydrogenSulfideDigesterScience
-        LCFADigesterScience -> VFAAlcoholsDigesterScience
-    }
-    group "Digester Acctogenesis Relationships" {
-        AminoAcidsDigesterScience -> AceticAcidDigesterScience 
-        SugarsDigesterScience -> AceticAcidDigesterScience
-        LCFADigesterScience -> AceticAcidDigesterScience
-        VFAAlcoholsDigesterScience -> AceticAcidDigesterScience
-        LCFADigesterScience -> HydrogenCarbonDioxideDigesterScience
-        VFAAlcoholsDigesterScience -> HydrogenCarbonDioxideDigesterScience
-        HydrogenCarbonDioxideDigesterScience -> AceticAcidDigesterScience
-    }
-    group "Digester Methanogenesis Relationships" {
-        AceticAcidDigesterScience -> MethaneCarbonDioxideDigesterScience
-        HydrogenCarbonDioxideDigesterScience -> MethaneCarbonDioxideDigesterScience 
-    }
-    group "Digester Output Relationships" {
-        MethaneCarbonDioxideDigesterScience -> OutputsDigesterScience
-        AmmoniaHydrogenSulfideDigesterScience -> OutputsDigesterScience
-    }
+        group "Digester Acidogenesis Relationships" {
+            AminoAcidsDigesterScience -> AmmoniaHydrogenSulfideDigesterScience
+            AminoAcidsDigesterScience -> VFAAlcoholsDigesterScience
+            SugarsDigesterScience -> AmmoniaHydrogenSulfideDigesterScience
+            SugarsDigesterScience -> VFAAlcoholsDigesterScience
+            LCFADigesterScience -> AmmoniaHydrogenSulfideDigesterScience
+            LCFADigesterScience -> VFAAlcoholsDigesterScience
+        }
+        group "Digester Acctogenesis Relationships" {
+            AminoAcidsDigesterScience -> AceticAcidDigesterScience 
+            SugarsDigesterScience -> AceticAcidDigesterScience
+            LCFADigesterScience -> AceticAcidDigesterScience
+            VFAAlcoholsDigesterScience -> AceticAcidDigesterScience
+            LCFADigesterScience -> HydrogenCarbonDioxideDigesterScience
+            VFAAlcoholsDigesterScience -> HydrogenCarbonDioxideDigesterScience
+            HydrogenCarbonDioxideDigesterScience -> AceticAcidDigesterScience
+        }
+        group "Digester Methanogenesis Relationships" {
+            AceticAcidDigesterScience -> MethaneCarbonDioxideDigesterScience
+            HydrogenCarbonDioxideDigesterScience -> MethaneCarbonDioxideDigesterScience 
+        }
+        group "Digester Output Relationships" {
+            MethaneCarbonDioxideDigesterScience -> OutputsDigesterScience
+            AmmoniaHydrogenSulfideDigesterScience -> OutputsDigesterScience
+        }
 
     }
 

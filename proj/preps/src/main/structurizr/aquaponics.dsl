@@ -1,4 +1,4 @@
-workspace "Kara Compound" "Desc: The Kara Compound" {
+//workspace "Kara Compound" "Desc: The Kara Compound" {
     model {
         group "Aquoponics Garden" {
             Aquaponics = softwareSystem "Aquaponics" {
@@ -123,4 +123,4 @@ workspace "Kara Compound" "Desc: The Kara Compound" {
     }
     views {
     }
-}
+//}

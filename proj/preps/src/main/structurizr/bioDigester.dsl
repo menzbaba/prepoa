@@ -105,7 +105,11 @@ workspace "Bio Digester" {
                         sewageHoldingTunnel -> this
                     }
                 }
-                LiquidFertalizer = container "Digester Liquid Fertalizer" "The liquid output of the digester is useful fertalizer" {
+                LiquidPlantFertalizer = container "Digester Liquid Plant Fertalizer" "Liquid Fertalizer at a ratio of 1:5 (fertilizer:water)" {
+                    sewageOutputDrain -> this
+                    this -> digesterEffluent
+                }
+                LiquidTreeFertalizer = container "Digester Liquid Tree Fertalizer" "Liquid Fertalizer at a ratio of 1:3 (fertilizer:water)" {
                     sewageOutputDrain -> this
                     this -> digesterEffluent
                 }

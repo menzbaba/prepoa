@@ -1,6 +1,5 @@
-!include https://raw.githubusercontent.com/menzbaba/prepoa/main/proj/preps/src/main/structurizr/aquaponics.dsl
 
-workspace "Kara Compound" "Desc: The Kara Compound" {
+workspace extends https://raw.githubusercontent.com/menzbaba/prepoa/main/proj/preps/src/main/structurizr/aquaponics.dsl {
     
     model {
         group Humans {

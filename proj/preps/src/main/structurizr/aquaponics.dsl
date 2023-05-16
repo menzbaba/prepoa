@@ -1,4 +1,6 @@
 workspace "Kara Aquaponics" {
+    !identifiers hierarchical
+
     model {
         group "Aquoponics Garden" {
             Aquaponics = softwareSystem "Aquaponics" {

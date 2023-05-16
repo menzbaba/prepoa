@@ -1,4 +1,4 @@
-//workspace "Kara Compound" "Desc: The Kara Compound" {
+workspace "Kara Aquaponics" {
     model {
         group "Aquoponics Garden" {
             Aquaponics = softwareSystem "Aquaponics" {
@@ -86,6 +86,9 @@
                     }
                 }
 
+                aquaponicsBiomassFilter = container "Aquaponics Biomass Filter" "bacteria that feast on fish water and makes it safe for plants" {
+                }
+
                 aquaponicsGrowBed = container "Aquaponics Grow Bed" {
                     radialFlowOutputValve -> this
                 }
@@ -123,4 +126,4 @@
     }
     views {
     }
-//}
+}

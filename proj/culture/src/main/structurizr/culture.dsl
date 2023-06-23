@@ -1,0 +1,237 @@
+workspace "Culture" {
+    //!identifiers hierarchical
+    // https://twitter.com/imUrB00gieman/status/1672300555266555904
+
+    model {
+        KarlMarx = person "Karl Marx"
+        Stalin = person "Stalin"
+        MarcuseHerbert = person "Herbert Marcuse" "One of the most influential original member of the Frankfurt School on Critical Theory"
+        AdornoTheodor = person "Theodor W. Adorno" "Wrote 'The Authortarian Personality'"
+
+        group "Identity" {
+            Privlidge = person "Privlige"
+            NormalPeople = person "Normal People"
+
+            MalePeople = person "Male People"
+            FemalePeople = person "Female People"
+
+            AdultPeople = person "Adult People"
+            MinorPeople = person "Minor People"
+
+            AblePeople = person "Able People"
+            DisabledPeople = person "Disabled People"
+
+            Heterosexuals = person "Heterosexual (het)" " Straight Person, attracted to opposite gender"
+            GayPeople = person "Gay Person" "Men attracted to men"
+            LesbianPeople = person "Lesbian Person" "Women attracted to women"
+            BisexualPeople = person "BiSexual Person" "attracted to both men and women"
+
+            TransPeople = person "Trans Person" "Gender Switching"
+            PrideActivists = person "Pride Activist"
+            TransActivists = person "Trans Activist" extends TransPeople
+            TransRightsActivists = person "Trans Rights Activists (TRA)" extends PrideActivists
+
+            WhitePeople = person "White People"
+            BlackPeople = person "Black People"
+            AsianPeople = person "Asian People"
+            AmericanIndianPeople = person "American Indian People"
+
+            USPeople = person "US People"
+            BritishPeople = person "British People"
+            AfricanPeople = person "African People"
+
+            ChristianPeople = person "Christian People"
+            MuslimPeople = person "Muslim People"
+
+        }
+        Capitalisim = softwareSystem "Capitalisim"
+
+        ClassicalMarxisim = softwareSystem "Classical Marxisim" {
+            KarlMarx -> this "Created"
+            Bourgeoisie = container "Bourgeoisie" "The Wealthy" {
+
+            }
+            Proletariat = container "Proletariat" "The Working Class" {
+                this -> Bourgeoisie "Oppressed By"
+                Bourgeoisie -> this "Oppressed"
+            } 
+        }
+
+        SocialMarxisim = softwareSystem "Social Marxisim" extends ClassicalMarxisim {
+            KarlMarx -> this "Created"
+            Stalin -> this "Implemented"
+            Haves = container "Haves" extends Bourgeoisie
+            HaveNots = container "Have Nots" extends Proletariat {
+                this -> Haves "Oppressed By"
+                Haves -> this "Opressed"
+            }
+        }
+        SovietSocialsim = softwareSystem "Soviet Socialism" extends SocialMarxisim {
+
+        }
+        CulturalMarxisim = softwareSystem "Cultural Marxisim" "Advocacy and application of Critical Theory and more generally to the cultural, political and academic influence of certain elements within the contemporary (1960's European and North American) left" {
+            // Confusing set of ideas, individiauls and approaches
+            SocialMarxisim -> this "Derived From"
+            this -> Capitalisim "Criticizes"
+            this -> SovietSocialsim "Criticizes"
+
+            CulturalMarxisimCharacteristic = container "Cultural Marxisim Characterists" {
+                pathological = componenet "Pathological" "Treats perceived oppressors as a disease" {
+                    
+                }
+                
+            }
+
+            CriticalTheory = container "Critical Theory" {
+
+            }
+            CriticalRaceTheory = container "Critical Race Theory (CRT)" extends CriticalTheory {
+                WhitePeople -> BlackPeople "oppressed"
+            }
+            FrankfurtSchool = container "Frankfurt Institute of Social Research at Goethe University" "Reserachers key in CulturalMarxisim in Goethe Universirty in Frankfurt, Germany during interwar period" {
+                MarcuseHerbert -> this "Most Influential Original Member"
+                AdornoTheodor -> this "Original Member"
+                TheAuthoritarianPersonality = component "Book: The Authoritarian Personality" {
+                    AdornoTheodor -> this "Authored"
+                }
+            }
+            Academia = container "Academia" {
+                socialScience = component "Social Sciences"
+                humanities = component "Humanities"
+                politicalScience = component "Political Science"
+                genderStudies = component "Gender Studies"
+                whitnessStudies = component "Whiteness Studies"
+                oppressionStudies = component "Oppression Studies"
+                privlidgeStudies = component "Privlidge Studies"
+            }
+            CriticalTheorist = container "Critical Theorist" {
+                MarcuseHerbert -> this "is a"
+                this -> FrankfurtSchool "Commonly taught at"
+            }
+            SocialJustice = container "Social Justice" {
+                softOnCrime = component "Soft On Crime for minorities"
+                excuseBadBehavior = component "Excuse Bad Behavior of minorities"
+                noAccountabilityMinority = component "No Accountability for minorities"
+                affirmitiveAction = component "Affirmitive Action"
+                equity = component "Equal Outcomes"
+                punishMajority = component "Punish the Majority"
+                reparations = component "Reparations"
+            }
+            1stFeminisim = container "Feminism, 1st Wave" "Women should have the right to vote" {
+
+            }
+            2ndFeminisim = container "Feminism, 2nd Wave" "Women have equal opportunity" extends 1stFeminisim {
+
+            }
+            3rdFeminisim = container "Feminism, 3rd Wave" "crap" extends 2ndFeminisim {
+
+            }
+            NeoProgressivism = container "Neo-Progressiveism" {
+
+            }
+            PostColonialsim = container "Post-Colonialsim" {
+                
+            }
+            GenderTheory = container "Gender Theory" extends CriticalTheory {
+                genderStudies -> this "study of"
+                TransRightsActivists -> this "Belive in"
+                MalePeople -> FemalePeople "oppressed"
+                cisGender = component "Cisgender People" {
+                    this -> NormalPeople "slur against"
+                    this -> TransPeople "Opposite of"
+                }
+            }
+            TransGenderists = container "Transgenderists" {
+                GenderTheory -> this "justifies"
+                TransRightsActivists -> this "Promotes"
+                TraditionalGenderRoles = component "Traditional Gender Roles" {
+                    TheAuthoritarianPersonality -> this "Pathological/Disease"
+                }
+            }
+            minorAttractedPersons = container "Minor Attracted Persons (MAPs)" {
+                this -> TransGenderists "often co-occurs with"
+                AttitudesTorwardsMinorSex = component "Attitudes Towards Sex" {
+                    TheAuthoritarianPersonality -> this "Pathological/Disease"
+                }
+            }
+
+            SexualOrientation = container "Sexual Orientation" extends CriticalTheory {
+                MinorPeople -> this "Should identify"
+                this -> Heterosexuals
+                this -> GayPeople
+                this -> LesbianPeople
+                this -> BisexualPeople
+                AttitudesTorwardsHeteroSex = component "Attitudes Towards Sex" {
+                    TheAuthoritarianPersonality -> this "Pathological/Disease"
+                }
+            }
+
+            lgb = container "LGB" {
+                this -> Heterosexuals "Excludes"
+                this -> GayPeople "Includes"
+                this -> LesbianPeople "Includes"
+                this -> BisexualPeople "Includes"
+                Heterosexual -> this "oppressed"
+            }
+
+            lgbtq = container "LGBTQ+" extends lgb {
+                this -> TransPeople "Includes"
+                LesbianPeople -> this "oppressed"
+            }
+
+            CriticalFamilyTheory = container "Critical Family Theory" "Belief against nuclear family" extends CriticalTheory {
+                AdultPeople -> MinorPeople "oppressed"
+                emancipation = component "Emancipation" {
+                    MinorPeople -> this "Pursue"
+                    AdultPeople -> this "Obstruct"
+                }
+                parenthood = component "Parenthood" {
+                    TheAuthoritarianPersonality -> this "Pathological/Disease"
+                }
+                FamilyPride = component "Family Pride" {
+                    TheAuthoritarianPersonality -> this "Pathological/Disease"
+                }
+            }
+            CriticalCultureTheory = container "Critical Culture Theory" extends CriticalTheory {
+                Patriotism = component "Patriotisim" {
+                    TheAuthoritarianPersonality -> this "Pathological/Disease"
+                }
+            }
+            CriticalReligionTheory = container "Critical Religion Theory" extends CriticalTheory {
+                ChristianPeople -> MuslimPeople "opressed"
+                Christianatiy = componenet "Christianity" {
+                    TheAuthoritarianPersonality -> this "Pathological/Disease"
+                }
+            }
+            PersonsIdentity = container "Persons Identity" {
+                CriticalRaceTheory -> this "Questions"    
+                genderTheory -> this "Questions"    
+                CriticalFamilyTheory -> this "Questions"    
+                CriticalCultureTheory -> this "Questions"    
+                CriticalReligionTheory -> this "Questions"
+                SexualOrientation -> this "Questions"    
+            }
+
+            Oppressed = container "Oppressed" {
+                oppressedPeople = component "Oppressed People"
+                this -> Privlidge "lack"
+                minorities = component "Minorities" "Under-privileged/Oppressed" {
+                    this -> Proletariat "Replaced"
+                }
+            }
+            Oppressors = container "Oppressors" {
+                this -> Privlidge "have"
+                oppressorPeople = component "Oppressor People" {
+                    this -> oppressedPeople "Opressed"
+                    oppressedPeople -> this "Opressed by"
+                }
+                majorities = component "Majorities" "Privileged/Oppressive" {
+                    this -> Bourgeoisie "Replaced"
+                }
+            }
+
+        }
+    }
+    views {
+    }
+}

@@ -1,6 +1,20 @@
 workspace "Financial Engineering" {
+    RegulatoryAuthroity = person "Regulatory Authority"
+    Comptroller = person "Comptroller" {
+        this -> RegulatoryAuthroity "interprets"
+    }
+
 
     model {
+        Assets = softwareSystem "Assets" {
+            AssetValuation = container "Asset Valuation" {
+                Comptroller -> this "Determines"
+                ReplacementValue = container "Replacement Value" "cost of replacing an asset with a similar one in its current condition. aka Current market price."
+                NetBookValue = container "NetBookValue" " the original cost of the asset minus the accumulated depreciation. Impaired by damage or obsolescence." {
+                    this -> ReplacementCost "Less than" "Due to ignored depreciation"
+                }
+            }
+        }
         FinancialMaturity = softwareSystem "Financial Maturity" {
             Cash = container "Cash" {
             }

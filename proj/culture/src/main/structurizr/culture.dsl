@@ -75,12 +75,97 @@ workspace "Culture" {
             this -> Capitalisim "Criticizes"
             this -> SovietSocialsim "Criticizes"
 
-            CulturalMarxisimCharacteristic = container "Cultural Marxisim Characterists" {
-                pathological = componenet "Pathological" "Treats perceived oppressors as a disease" {
-                    
-                }
-                
+            OppressorPower = container "Power" "What oppressors have over oppressed" {
+
             }
+            InventedWords = container "Invented Words" {
+                wordTransphobe = component "Transphobe"
+                wordIslamaphobe = component "Islamaphobe"
+                wordHomophobe = component "Homophobe"
+                wordAcab = component "All Cops Are Bastards (ACAB)"
+            }
+            MutilatedWords = container "Mutilated Words" {
+                wordGender = component "Gender"
+                wordTrueSelf = component "True Self" {
+                    this -> TransPeople "lies"
+                }
+                wordSex = component "Sex" {
+                    wordGender -> this "Independant of"
+                }
+                wordFascist = component "Fascist" {
+                    this -> OppressorPower "requires"
+                }
+                wordBigot = component "Bigot" "Prejudice + Power" {
+                    this -> OppressorPower "requires"
+                }
+                wordRacist = component "Racist" "Prejudice + Power" {
+                    this -> OppressorPower "requires"
+                }
+                wordSexism = component "Sexisim"
+                wordSexist = component "Sexist" "Prejudice + Power" extends wordSexism {
+                    this -> OppressorPower "requires"
+                    MalePeople -> this "can be"
+                    FemalePeople -> this "can't be"
+                    TransPeople -> this "can't be"
+                }
+                wordCriminal = component "Criminal"
+                wordVictim = component "Victim"
+                wordRioting = component "Rioting"
+                wordLooting = component "Looting"
+                wordVandelisim = component "Vandelisim"
+                wordDisturbingThePeace = component "Disturbing the Peace"
+                wordDisruption = component "Disruption"
+                wordArson = component "Arson"
+                wordPeacefulProtest = component "Peaceful Protest" {
+                    wordRioting -> this "if oppressed"
+                    wordLooting -> this "if oppressed"
+                    wordArson -> this "if oppressed"
+                    wordVandelisim -> this "if oppressed" 
+                    wordDisturbingThePeace -> this "if oppressed" 
+                    wordDisruption -> this "if oppressed" 
+                }
+            }
+            AlternativeWords = container "Alternative Words" {
+                wordIllegalAliens = component "Illegal Aliens"
+                wordUndocumentedMigrants = component "Undocumented Migrants" {
+                    this -> wordIllegalAliens "preferred over"
+                }
+                wordDiscrimination = component "Discrimination"
+                wordAffirmitiveAction = component "Affirmative Action" {
+                    this -> wordDiscrimination "preferred over"
+                }
+            }
+            CulturalMarxisimCharacteristic = container "Cultural Marxisim Characterists" {
+                pathological = component "Pathological" "Treats perceived oppressors as a disease" {
+                    wordTransphobe -> this
+                    wordHomophobe -> this
+                    wordIslamaphobe -> this
+                }
+                politicalCorrectness = component "PoliticalCorrectness" {
+                    wordGender -> this "Gender is not sex, it's spirit"
+                    wordFascist -> this "if you don't agree with us"
+                    wordBigot -> this "if you don't agree with us"
+                    wordRacist -> this "Data is"
+                    wordIllegalAliens -> this "No Humans are illegal"
+                }
+                UnwaveringlyBiasedView = component "Maintain an unwaveringly biased view" {
+                    //this -> oppressed "Favorable"
+                    //this -> Oppressors "Villianized"
+                    this -> wordCriminal "only oppressors"
+                    this -> wordVictim "only oppressed"
+                    this -> wordAcab
+                }
+                InversionBeliefs = component "Inversion Beliefs" "Believing the opposite of morality" {
+                    prolife = component "Pro Life"
+                    prochoice = component "Pro Choice" {
+                        this -> prolife "Late Choice superceeds Baby's life"
+                    }
+                    wordVictim -> wordCriminal "if oppressor"
+                    wordCriminal -> wordVictim "if Oppressed"
+                }
+            }
+
+            
 
             CriticalTheory = container "Critical Theory" {
 
@@ -171,7 +256,7 @@ workspace "Culture" {
                 this -> GayPeople "Includes"
                 this -> LesbianPeople "Includes"
                 this -> BisexualPeople "Includes"
-                Heterosexual -> this "oppressed"
+                Heterosexuals -> this "oppressed"
             }
 
             lgbtq = container "LGBTQ+" extends lgb {
@@ -199,7 +284,7 @@ workspace "Culture" {
             }
             CriticalReligionTheory = container "Critical Religion Theory" extends CriticalTheory {
                 ChristianPeople -> MuslimPeople "opressed"
-                Christianatiy = componenet "Christianity" {
+                Christianatiy = component "Christianity" {
                     TheAuthoritarianPersonality -> this "Pathological/Disease"
                 }
             }

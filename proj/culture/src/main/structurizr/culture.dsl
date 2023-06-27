@@ -7,6 +7,13 @@ workspace "Culture" {
         Stalin = person "Stalin"
         MarcuseHerbert = person "Herbert Marcuse" "One of the most influential original member of the Frankfurt School on Critical Theory"
         AdornoTheodor = person "Theodor W. Adorno" "Wrote 'The Authortarian Personality'"
+        SiguschVolkmar = person "Volkmar Sigusch" "German Pedophile Sexologist who coined the terms cisgender and cissexual"
+        HerzogDagmar = person "Dagmar Herzog" "Author: Sex after Fascism: Memory and Morality in Twentieth-Century Germany"
+        SchmidtGunter = person "Guntler Schmidt" "Published research on child porn consumption in 70s Germany"
+        KentlerHelmut = person "Helmut Kentler" "Radical education scholor arguing for pedophiles in front of German Parliment"
+        GermanGreenParty = person "Germany's Green Party"
+        DrHaberlenJoachim = person "Dr. Joachim Haberlen" "author of 'Feeling Like a Child: Dreams and Practices of Sexuality in the West German ALternative Left during the Long 1970s"
+
 
         group "Identity" {
             Privlidge = person "Privlige"
@@ -83,6 +90,12 @@ workspace "Culture" {
                 wordIslamaphobe = component "Islamaphobe"
                 wordHomophobe = component "Homophobe"
                 wordAcab = component "All Cops Are Bastards (ACAB)"
+                wordCisgender = component "Cisgender" {
+                    this -> SiguschVolkmar "coined by"
+                }
+                wordCissexual = component "Cissexual" {
+                    this -> SiguschVolkmar "coined by"
+                }
             }
             MutilatedWords = container "Mutilated Words" {
                 wordGender = component "Gender"
@@ -222,6 +235,7 @@ workspace "Culture" {
                 TransRightsActivists -> this "Belive in"
                 MalePeople -> FemalePeople "oppressed"
                 cisGender = component "Cisgender People" {
+                    this -> SiguschVolkmar "coined by"
                     this -> NormalPeople "slur against"
                     this -> TransPeople "Opposite of"
                 }
@@ -234,9 +248,28 @@ workspace "Culture" {
                 }
             }
             minorAttractedPersons = container "Minor Attracted Persons (MAPs)" {
+                // fucking sickos
                 this -> TransGenderists "often co-occurs with"
+                SiguschVolkmar -> this "was a"
                 AttitudesTorwardsMinorSex = component "Attitudes Towards Sex" {
                     TheAuthoritarianPersonality -> this "Pathological/Disease"
+                }
+                SexAfterFascism = component "Book: Sex after Fascism: Memory and Morality in Twentieth-Century Germany" {
+                    HerzogDagmar -> this "Authored"
+                    this -> SiguschVolkmar "Quoted"
+                    this -> SchmidtGunter "Quoted"
+                }
+                FeelingLikeAChild = component "Article: Feeling Like a Child: Dreams and Practices of Sexuality in the West German ALternative Left during the Long 1970s" {
+                    DrHaberlenJoachim -> this "Authored"
+                    this -> KentlerHelmut "referenced"
+                    this -> SiguschVolkmar "referenced"
+                }
+                liberationOfPedophilia = component "Liberation of Pedophilia" {
+                    FeelingLikeAChild -> this "Supported"
+                    SiguschVolkmar -> this "Supported"
+                    SchmidtGunter -> this "Supported"
+                    KentlerHelmut -> this "Supported"
+                    GermanGreenParty -> this "Supported"
                 }
             }
 

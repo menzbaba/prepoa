@@ -1,0 +1,14 @@
+{
+    "recommendations": [
+        "editorconfig.editorconfig",
+        "vincent-ledu.adr-tools",
+        "systemticks.c4-dsl-extension",
+        "kddejong.vscode-cfn-lint",
+        "aws-scripting-guy.cform",
+        "ms-azuretools.vscode-docker",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "redhat.vscode-yaml"
+    ]
+}

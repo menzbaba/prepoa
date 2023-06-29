@@ -41,6 +41,39 @@ workspace "Financial Engineering" {
             }
         }
 
+        FinanceAllianceApproach = softwareSystem "Finance Alliance approach" {
+            bottomUpApproach = container "Bottom-Up Approach" {
+                operationalLevel = component "Starts at the operational level"
+                employeeDriven = component "Employee Driven" {
+                    operationalLevel -> this
+                }
+                focusOnSpecifics = component "Focus on individual departments & projects" {
+                    employeeDriven -> this
+                }
+                moreAccurateDetailed = component "More accurate & detailed" {
+                    focusOnSpecifics -> this
+                }
+                timeConsumingProcess = component "Time-consuming process" {
+                    moreAccurateDetailed -> this
+                }
+            }
+            TopDownApproach = container "Top-Down Approach" {
+                startsBigPicture = component "Starts with big picture"
+                potentialUnrealisticExpectations = component "Potential for unrealistic expectations" {
+                    startsBigPicture -> this
+                }
+                fasterImplementation = component "Faster implementation" {
+                    potentialUnrealisticExpectations -> this
+                }
+                focusOnMacroEconomics = component "Focus on macroeconomics factors" {
+                    fasterImplementation -> this
+                }
+                managementDriven = component "Management Driven" {
+                    focusOnMacroEconomics -> this
+                }
+            }
+        }
+
         Assets = softwareSystem "Assets" {
             AssetValuation = container "Asset Valuation" {
                 Comptroller -> this "Determines"

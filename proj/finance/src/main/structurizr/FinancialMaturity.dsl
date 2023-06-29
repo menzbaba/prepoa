@@ -1,11 +1,33 @@
 workspace "Financial Engineering" {
-    RegulatoryAuthroity = person "Regulatory Authority"
-    Comptroller = person "Comptroller" {
-        this -> RegulatoryAuthroity "interprets"
-    }
-
 
     model {
+        RegulatoryAuthroity = person "Regulatory Authority"
+        Comptroller = person "Comptroller" {
+            this -> RegulatoryAuthroity "interprets"
+        }
+
+        ValueCreationInitiatives = softwareSystem "Value Creation Initiatives" {
+            StrategicMultipleDrivers = container "Strategic Levers, Multiple Drivers" {
+                mergersAcquisitions = component "Mergers & Acquisitions"
+                geographicExpansion = component "Geographic Expansion"
+                customerSegmentation = component "Customer Segmentation"
+                strategicPricing = component "Strategic Pricing"
+                productStrategyInnovation = component "Product Strategy & Innovation"
+                aftermarketServicesStrategy = component "Aftermarket Services Strategy"
+                distributionStrategy = component "Distribution Strategy"
+                digitalTransformation = component "Digital Transformation"
+                dataStrategy = component "Data Strategy"
+            }
+            OperationalEBITDAMargin = softwareSystem "Operational levers, EBITDA margin" {
+                pricingOptimization = component "Pricing Optimization"
+                productPortfolioOptimization = component "Product Portfolio Optimization"
+                salesForceEffectiveness = component "Sales Force Effectiveness"
+                operationalEfficiencies = component "Operational Efficiencies"
+                procurementManagingSuppliers = component "Procurement & Managing Suppliers"
+                costToServe = component "Cost To Serve"
+            }
+        }
+
         Assets = softwareSystem "Assets" {
             AssetValuation = container "Asset Valuation" {
                 Comptroller -> this "Determines"

@@ -74,6 +74,14 @@ workspace "Financial Engineering" {
             }
         }
 
+        IncomeTypes = softwareSystem "Income Types" {
+            // 15.3% Self-Employment Tax on ordinary Income for SSI and MEdicare + Federal + State
+            OrdinaryIncome = container "Ordinary Income" "Everyday income, hourly, salary, 1099"
+            // No SSI, No Medicare
+            PassiveIncome = container "Passive Income" "Income you don't have to work for, rights, royalties, investments"
+            PortfolioIncome = container "Portfolio Income" "Income from capital assets, like real estate"
+        }
+
         Assets = softwareSystem "Assets" {
             AssetValuation = container "Asset Valuation" {
                 Comptroller -> this "Determines"

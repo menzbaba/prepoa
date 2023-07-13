@@ -18,6 +18,24 @@ workspace "Financial Engineering" {
             this -> GAAP "implements"
         }
 
+        CreditAgencies = softwareSystem "Credit Agencies" {
+            experian = container "Experian"
+            equifqx = container "Exuifax"
+            transunion = container "Trans Union"
+            duns = container "Duns & Bradstreet"
+            creditSafe = container "Credit Safe"
+        }
+
+        CreditPeriods= softwareSystem "Credit Time Periods" {
+            tradeData = container "Trade Data 3yrs"
+            judgementData = container "Judgement Data 6yrs 9mo"
+            bankruptsyData = container "Bankruptsy Data 9yrs 9mo"
+            taxLeinData = container "Tax Lein Data 6yrs 9mo"
+            collectionsData = container "Collections Data 6yrs 9mo"
+            uccFilingsData = container "Uniform Commercial Code Filings Data 5yrs"
+            bankGovLeasingData = container "Bank or Government Leasing Data 3yrs"
+        }
+
         ValueCreationInitiatives = softwareSystem "Value Creation Initiatives" {
             StrategicMultipleDrivers = container "Strategic Levers, Multiple Drivers" {
                 mergersAcquisitions = component "Mergers & Acquisitions"
